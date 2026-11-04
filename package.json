@@ -1,0 +1,17 @@
+{
+  "name": "flexgym-admin",
+  "version": "1.0.0",
+  "description": "FlexGym Production Admin Portal with Live UPI Redirection & Clean Database",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "dependencies": {
+    "body-parser": "^2.3.0",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "mongoose": "^9.7.4",
+    "dotenv": "^16.4.7"
+  }
+}

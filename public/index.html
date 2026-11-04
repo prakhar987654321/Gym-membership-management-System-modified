@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FlexGym Premium Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link rel="stylesheet" href="style.css"/>
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header>
+      <div class="logo">
+        <i class="fa-solid fa-dumbbell text-blue"></i> FlexGym Admin
+      </div>
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" placeholder="Search members, classes..." id="search" />
+      </div>
+      <nav>
+        <a href="#" data-section="dashboard" class="active">Dashboard</a>
+        <a href="#" data-section="members">Members</a>
+        <a href="#" data-section="classes">Classes</a>
+        <a href="#" data-section="trainers">Trainers</a>
+      </nav>
+            <!-- THEME TOGGLE (DARK / LIGHT) -->
+      <button id="theme-toggle" class="theme-toggle-btn" title="Toggle Light / Dark Mode">
+        <i class="fa-solid fa-moon"></i>
+      </button>
+
+      <div class="profile">
+        <i class="fa-solid fa-bell notification"></i>
+        <div class="avatar-letter">P</div>
+        <div>
+          <h4>Prakhar</h4>
+          <small>Super Admin</small>
+        </div>
+      </div>
+    </header>
+
+    <div class="layout">
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="sidebar-logo">
+          <i class="fa-solid fa-dumbbell"></i>
+          <h2>FlexGym</h2>
+        </div>
+        <ul>
+          <li class="active" data-section="dashboard">
+            <a href="#"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
+          </li>
+          <li data-section="members">
+            <a href="#"><i class="fa-solid fa-users"></i> Members</a>
+          </li>
+          <li data-section="classes">
+            <a href="#"><i class="fa-solid fa-calendar-days"></i> Classes</a>
+          </li>
+          <li data-section="trainers">
+            <a href="#"><i class="fa-solid fa-user-tie"></i> Trainers</a>
+          </li>
+          <li data-section="membership">
+            <a href="#"><i class="fa-solid fa-gem"></i> Membership</a>
+          </li>
+          <li data-section="payments">
+            <a href="#"><i class="fa-solid fa-credit-card"></i> Payments</a>
+          </li>
+          <li data-section="reports">
+            <a href="#"><i class="fa-solid fa-chart-column"></i> Reports</a>
+          </li>
+          <li data-section="settings">
+            <a href="#"><i class="fa-solid fa-gear"></i> Settings</a>
+          </li>
+        </ul>
+      </aside>
+
+      <!-- MAIN CONTAINER -->
+      <main class="container">
+        <!-- 1. DASHBOARD -->
+        <section id="section-dashboard" class="section-content active">
+          <h3 class="h3"><i class="fa-solid fa-gauge-high text-blue"></i> Gym Overview</h3>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div>
+                <h4>Total Members</h4>
+                <p id="total-members">0</p>
+              </div>
+              <i class="fa-solid fa-users blue"></i>
+            </div>
+            <div class="stat-card">
+              <div>
+                <h4>Active Classes</h4>
+                <p id="active-classes">0</p>
+              </div>
+              <i class="fa-solid fa-calendar-days green"></i>
+            </div>
+            <div class="stat-card">
+              <div>
+                <h4>Available Trainers</h4>
+                <p id="available-trainers">0</p>
+              </div>
+              <i class="fa-solid fa-user-tie purple"></i>
+            </div>
+          </div>
+
+          <div class="analytics">
+            <div class="analytics-left">
+              <h3 class="h3"><i class="fa-solid fa-chart-line text-blue"></i> Weekly Workout Activity</h3>
+              <div class="chart-area">
+                <div class="bar" style="height: 65%"></div>
+                <div class="bar" style="height: 85%"></div>
+                <div class="bar" style="height: 45%"></div>
+                <div class="bar" style="height: 95%"></div>
+                <div class="bar" style="height: 75%"></div>
+                <div class="bar" style="height: 100%"></div>
+              </div>
+              <div class="months">
+                <span>Mon</span>
+                <span>Tue</span>
+                <span>Wed</span>
+                <span>Thu</span>
+                <span>Fri</span>
+                <span>Sat</span>
+              </div>
+            </div>
+            <div class="analytics-right">
+              <div class="mini-card">
+                <h4>Total Revenue</h4>
+                <h2 id="total-revenue">₹0</h2>
+                <p><i class="fa-solid fa-circle-check"></i> Real-time DB Sync</p>
+              </div>
+              <div class="mini-card">
+                <h4>Class Capacity Filled</h4>
+                <h2 id="attendance">0%</h2>
+                <p><i class="fa-solid fa-bolt"></i> Live Tracking</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="dashboard-bottom">
+            <div class="recent-members">
+              <h3 class="h3"><i class="fa-solid fa-users text-blue"></i> Recent Registered Members</h3>
+              <table class="recent-table">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Plan</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="recent-members-body">
+                  <tr><td colspan="3" style="text-align:center; color:#64748b; padding:20px;">No registered members yet.</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="upcoming-card">
+              <h3 class="h3"><i class="fa-solid fa-calendar-days text-green"></i> Upcoming Classes</h3>
+              <div id="upcoming-classes">
+                <p style="color:#64748b; padding:15px 0;">No classes scheduled yet.</p>
+              </div>
+              <a href="#" data-section="classes" class="view-btn">View All Classes</a>
+            </div>
+          </div>
+
+          <div class="quick-actions">
+            <h3 class="h3"><i class="fa-solid fa-bolt text-orange"></i> Quick Actions</h3>
+            <div class="action-box">
+              <div class="action-card" data-section="members">
+                <i class="fa-solid fa-user-plus"></i>
+                <p>Register Member</p>
+              </div>
+              <div class="action-card" data-section="classes">
+                <i class="fa-solid fa-calendar-plus"></i>
+                <p>Add Class</p>
+              </div>
+              <div class="action-card" data-section="trainers">
+                <i class="fa-solid fa-user-tie"></i>
+                <p>Add Trainer</p>
+              </div>
+              <div class="action-card" data-section="payments">
+                <i class="fa-solid fa-credit-card"></i>
+                <p>View Payments</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. MEMBERS -->
+        <section id="section-members" class="section-content">
+          <h3 class="h3"><i class="fa-solid fa-users text-blue"></i> Register New Member</h3>
+          <form id="member-form" class="register-form">
+            <div class="form-row">
+              <div class="forma">
+                <label><i class="fa-solid fa-signature"></i> Full Name</label>
+                <input type="text" name="name" placeholder="Enter Full Name" required />
+              </div>
+              <div class="forma">
+                <label><i class="fa-solid fa-envelope"></i> Email Address</label>
+                <input type="email" name="email" placeholder="Enter Email Address" required />
+              </div>
+              <div class="forma">
+                <label><i class="fa-solid fa-gem"></i> Select Membership Plan</label>
+                <select name="plan" id="member-plan-select">
+                  <option value="Monthly">Monthly Plan — ₹1,000</option>
+                  <option value="Quarterly">Quarterly Plan — ₹2,500</option>
+                  <option value="Annual">Annual Plan — ₹8,000</option>
+                </select>
+              </div>
+            </div>
+            <button type="submit" class="btn">
+              <i class="fa-solid fa-credit-card"></i> Proceed to Pay & Register
+            </button>
+          </form>
+
+          <div id="member-message" style="margin: 12px 0"></div>
+
+          <h3 class="h3" style="margin-top: 35px;"><i class="fa-solid fa-list-check text-blue"></i> Registered Members List</h3>
+          <table class="data" id="members-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Plan</th>
+                <th>Payment Mode</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td colspan="6" style="text-align:center; color:#64748b; padding:20px;">No registered members in database.</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- 3. CLASSES -->
+        <section id="section-classes" class="section-content">
+          <h3 class="h3"><i class="fa-solid fa-calendar-days text-blue"></i> Schedule New Class</h3>
+          <form id="class-form" class="register-form">
+            <div class="form-row">
+              <div class="forma">
+                <label><i class="fa-solid fa-dumbbell"></i> Class Title</label>
+                <input type="text" name="title" placeholder="e.g. HIIT Morning Shift" required />
+              </div>
+              <div class="forma">
+                <label><i class="fa-solid fa-user-tie"></i> Assigned Trainer</label>
+                <input type="text" name="trainer" placeholder="e.g. Rohit Sharma" required />
+              </div>
+              <div class="forma">
+                <label><i class="fa-solid fa-clock"></i> Class Timing</label>
+                <input type="text" name="timing" placeholder="e.g. 6:00 AM - 7:30 AM" required />
+              </div>
+              <div class="forma">
+                <label><i class="fa-solid fa-users"></i> Max Slots</label>
+                <input type="number" name="total" placeholder="20" value="20" min="1" required />
+              </div>
+            </div>
+            <button type="submit" class="btn">
+              <i class="fa-solid fa-circle-plus"></i> Create & Schedule Class
+            </button>
+          </form>
+
+          <div id="class-message" style="margin: 12px 0"></div>
+
+          <h3 class="h3" style="margin-top: 35px;"><i class="fa-solid fa-dumbbell text-blue"></i> Active Classes</h3>
+          <table class="data" id="classes-table">
+            <thead>
+              <tr>
+                <th>Class Title</th>
+                <th>Trainer</th>
+                <th>Timing</th>
+                <th>Booked / Total</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td colspan="5" style="text-align:center; color:#64748b; padding:20px;">No classes scheduled yet.</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- 4. TRAINERS -->
+        <section id="section-trainers" class="section-content">
+          <h3 class="h3"><i class="fa-solid fa-user-tie text-blue"></i> Add New Trainer</h3>
+          <form id="trainer-form" class="register-form">
+            <div class="form-row">
+              <div class="forma">
+                <label><i class="fa-solid fa-user"></i> Trainer Name</label>
+                <input type="text" name="name" placeholder="Trainer Full Name" required />
+              </div>
+              <div class="forma">
+                <label><i class="fa-solid fa-bolt"></i> Specialty</label>
+                <input type="text" name="specialty" placeholder="e.g. CrossFit / Bodybuilding" required />
+              </div>
+              <div class="forma">
+                <label><i class="fa-solid fa-circle-check"></i> Availability Status</label>
+                <select name="status">
+                  <option value="Available">Available</option>
+                  <option value="Busy">Busy</option>
+                  <option value="On Leave">On Leave</option>
+                </select>
+              </div>
+            </div>
+            <button type="submit" class="btn">
+              <i class="fa-solid fa-user-plus"></i> Save Trainer
+            </button>
+          </form>
+
+          <div id="trainer-message" style="margin: 12px 0"></div>
+
+          <h3 class="h3" style="margin-top: 35px;"><i class="fa-solid fa-id-card-clip text-blue"></i> Trainer Directory</h3>
+          <table class="data" id="trainers-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Specialty</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td colspan="4" style="text-align:center; color:#64748b; padding:20px;">No trainers added yet.</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- 5. MEMBERSHIP -->
+        <section id="section-membership" class="section-content">
+          <h3 class="h3"><i class="fa-solid fa-gem text-blue"></i> Available Membership Plans</h3>
+          <div id="plans-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px;"></div>
+        </section>
+
+        <!-- 6. PAYMENTS -->
+        <section id="section-payments" class="section-content">
+          <h3 class="h3"><i class="fa-solid fa-credit-card text-blue"></i> Payment History & Audit Log</h3>
+          <table class="data" id="payments-table">
+            <thead>
+              <tr>
+                <th>Member Name</th>
+                <th>Plan</th>
+                <th>Amount Paid</th>
+                <th>Payment Mode</th>
+                <th>Status</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td colspan="6" style="text-align:center; color:#64748b; padding:20px;">No payment records recorded.</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- 7. REPORTS -->
+        <section id="section-reports" class="section-content">
+          <h3 class="h3"><i class="fa-solid fa-chart-column text-blue"></i> Financial & Membership Reports</h3>
+          <div id="reports-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;"></div>
+          <h4 style="margin-top: 30px"><i class="fa-solid fa-pie-chart text-green"></i> Active Plans Breakdown</h4>
+          <ul id="plan-distribution" style="list-style: none; padding: 0; margin-top: 15px;"></ul>
+        </section>
+
+        <!-- 8. SETTINGS -->
+        <section id="section-settings" class="section-content">
+          <h3 class="h3"><i class="fa-solid fa-gear text-blue"></i> System Settings</h3>
+          <div class="mini-card" style="max-width: 600px; padding: 24px;">
+            <h4><i class="fa-solid fa-database text-blue"></i> Database Management</h4>
+            <p style="color: #94a3b8; font-size: 13px; margin: 10px 0 16px 0;">Clear all registered entries and start with a clean 0 entries slate.</p>
+            <button onclick="resetAllData()" class="btna" style="background: #ef4444; padding: 10px 18px; border-radius: 8px;">
+              <i class="fa-solid fa-trash-can"></i> Reset Database to 0
+            </button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- PAYMENT & UPI REDIRECTION MODAL -->
+    <div id="payment-modal" class="modal" style="display: none">
+      <div class="modal-content" style="max-width: 540px; padding: 28px 30px;">
+        <div class="modal-header" style="margin-bottom: 16px; padding-bottom: 12px;">
+          <h3 style="font-size: 19px; display: flex; align-items: center; gap: 8px;">
+            <i class="fa-solid fa-shield-halved text-blue"></i> UPI Payment & Activation
+          </h3>
+          <span class="close-modal">&times;</span>
+        </div>
+        <div class="modal-body">
+          <!-- Summary card -->
+          <div class="payment-summary-box">
+            <div class="summary-line">
+              <span>Member Name:</span>
+              <strong id="modal-member-name">-</strong>
+            </div>
+            <div class="summary-line">
+              <span>Plan Selected:</span>
+              <strong id="modal-member-plan" class="text-blue">-</strong>
+            </div>
+            <div class="summary-line">
+              <span>Total Payable Amount:</span>
+              <strong id="modal-member-amount" style="color: #10b981; font-size: 20px; font-family: 'Outfit', sans-serif;">₹0</strong>
+            </div>
+          </div>
+
+          <!-- QR Code and UPI Scan section (Always visible) -->
+          <div class="upi-qr-card" style="margin-top: 14px; padding: 18px 16px;">
+            <p style="font-size: 13px; font-weight: 600; color: var(--text-main); margin-bottom: 8px;">
+              <i class="fa-solid fa-qrcode text-blue"></i> Scan QR code with any UPI App
+            </p>
+            <div id="qr-image-wrapper" style="min-height: 180px; display: flex; align-items: center; justify-content: center;">
+              <!-- QR will be dynamically rendered here -->
+            </div>
+            <p id="qr-upi-note" style="font-size: 11.5px; color: var(--text-muted); margin-top: 6px;">
+              Supports GPay, PhonePe, Paytm, BHIM, Cred & Banking UPI
+            </p>
+          </div>
+
+          <!-- Direct App Buttons (Opens App Directly on Phone / Tablet / Desktop) -->
+          <p style="margin: 16px 0 10px 0; font-size: 13px; font-weight: 700; color: var(--text-main);">
+            <i class="fa-solid fa-mobile-screen-button text-blue"></i> Or Click to Open UPI App Directly:
+          </p>
+          
+          <div id="payment-methods" class="payment-grid" style="grid-template-columns: repeat(4, 1fr); gap: 10px;">
+            <!-- Google Pay -->
+            <button type="button" class="payment-app-btn" onclick="triggerUPI('gpay')" title="Open Google Pay">
+              <i class="fa-brands fa-google-pay" style="font-size: 30px; color: #4285f4"></i>
+              <span>GPay</span>
+            </button>
+
+            <!-- PhonePe -->
+            <button type="button" class="payment-app-btn" onclick="triggerUPI('phonepe')" title="Open PhonePe">
+              <i class="fa-solid fa-mobile-screen-button" style="font-size: 24px; color: #5f259f"></i>
+              <span>PhonePe</span>
+            </button>
+
+            <!-- Paytm -->
+            <button type="button" class="payment-app-btn" onclick="triggerUPI('paytm')" title="Open Paytm">
+              <i class="fa-solid fa-qrcode" style="font-size: 24px; color: #00baf2"></i>
+              <span>Paytm</span>
+            </button>
+
+            <!-- Generic UPI -->
+            <button type="button" class="payment-app-btn" onclick="triggerUPI('upi')" title="Open Default UPI App">
+              <i class="fa-solid fa-bolt" style="font-size: 24px; color: #10b981"></i>
+              <span>Any UPI</span>
+            </button>
+          </div>
+
+          <!-- Bottom Action Buttons -->
+          <div style="margin-top: 18px; display: flex; flex-direction: column; gap: 8px;">
+            <a id="direct-upi-link" href="#" class="btn" style="background: linear-gradient(135deg, #0ea5e9, #3b82f6); font-size: 13.5px; padding: 11px;">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Open App via UPI Link
+            </a>
+            <button type="button" onclick="confirmPaymentSuccess()" class="btn" style="background: linear-gradient(135deg, #10b981, #059669); font-size: 14px; padding: 13px;">
+              <i class="fa-solid fa-circle-check"></i> Payment Done — Activate Member
+            </button>
+          </div>
+
+          <!-- Payment Processing Indicator -->
+          <div id="payment-status" style="display: none; margin-top: 18px; text-align: center">
+            <div class="payment-loader"></div>
+            <p id="payment-message" style="margin-top: 10px; color: var(--text-main); font-weight: 600; font-size: 13.5px;">
+              Registering member in database...
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
